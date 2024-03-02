@@ -1,9 +1,10 @@
 package com.example.card_game_helper.Models;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+
+
+
 import org.hibernate.annotations.UuidGenerator;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import java.util.Set;
 import java.util.UUID;
@@ -12,21 +13,25 @@ import java.util.UUID;
 @Table(name = "groups")
 public class Group {
     @Id
-    @GeneratedValue
-    @UuidGenerator
-    private UUID group_id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     private String groupName;
 
     @ManyToMany
     Set<User> usersInGroups;
+    @OneToMany(mappedBy = "group")
+    private Set<Tag> tagsInGroup;
+
+    @OneToMany(mappedBy = "group")
+    private Set<Activity> activities;
 
     public UUID getGroup_id() {
-        return group_id;
+        return id;
     }
 
     public void setGroup_id(UUID group_id) {
-        this.group_id = group_id;
+        this.id = group_id;
     }
 
     public String getGroupName() {
@@ -43,5 +48,21 @@ public class Group {
 
     public void setUsersInGroups(Set<User> usersInGroups) {
         this.usersInGroups = usersInGroups;
+    }
+
+    public Set<Tag> getTagsInGroup() {
+        return tagsInGroup;
+    }
+
+    public void setTagsInGroup(Set<Tag> tagsInGroup) {
+        this.tagsInGroup = tagsInGroup;
+    }
+
+    public Set<Activity> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(Set<Activity> activities) {
+        this.activities = activities;
     }
 }

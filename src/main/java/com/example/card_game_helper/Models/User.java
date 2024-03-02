@@ -1,12 +1,11 @@
 package com.example.card_game_helper.Models;
 
-import jakarta.persistence.Table;
-import org.hibernate.annotations.Entity;
+
+
+
 import org.hibernate.annotations.UuidGenerator;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import jakarta.persistence.*;
 
 import java.util.Set;
 import java.util.UUID;
@@ -17,9 +16,8 @@ import java.util.UUID;
 public class User {
 
     @Id
-    @GeneratedValue
-    @UuidGenerator
-    private UUID user_id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
 
         private String email;
@@ -46,11 +44,11 @@ public class User {
     @ManyToMany
         Set<Activity> likes;
         public UUID getUser_id() {
-            return user_id;
+            return id;
         }
 
         public void setUser_id(UUID user_id) {
-            this.user_id = user_id;
+            this.id = user_id;
         }
 
         public String getEmail() {
