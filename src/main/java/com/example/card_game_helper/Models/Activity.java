@@ -1,12 +1,12 @@
 package com.example.card_game_helper.Models;
 
-import jakarta.persistence.Table;
+
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.UuidGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import jakarta.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
@@ -17,7 +17,7 @@ public class Activity {
     @Id
     @GeneratedValue
     @UuidGenerator
-    private UUID activity_id;
+    private UUID id;
 
     private String name;
     private String picture;
@@ -25,7 +25,14 @@ public class Activity {
     private int likes;
 
     @ManyToMany
+    @JsonIgnore
     Set<User> usersLikes;
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    @JsonIgnore
+    private Group group;
+
+
 
     public int getLikes() {
         return likes;
@@ -46,11 +53,11 @@ public class Activity {
 
 
     public UUID getActivity_id() {
-        return activity_id;
+        return id;
     }
 
     public void setActivity_id(UUID activity_id) {
-        this.activity_id = activity_id;
+        this.id = activity_id;
     }
 
     public String getName() {
@@ -67,5 +74,21 @@ public class Activity {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }
