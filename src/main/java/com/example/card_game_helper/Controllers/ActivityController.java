@@ -1,5 +1,6 @@
 package com.example.card_game_helper.Controllers;
 
+import com.example.card_game_helper.DTO.ActivityDTO;
 import com.example.card_game_helper.Models.Activity;
 import com.example.card_game_helper.Models.Group;
 import com.example.card_game_helper.Services.ActivityService;
@@ -21,21 +22,14 @@ public class ActivityController {
 
     @Autowired
     private ActivityService activityService;
-
     @GetMapping("/getActivities")
-    public ResponseEntity<Object> getActivities(
+    public List<ActivityDTO> getActivities(
 //            @RequestHeader("Authorization") String token,
             @RequestParam UUID groupId,
-//            @RequestParam UUID categoryId,
+//          @RequestParam UUID categoryId,
             @RequestParam int firstElement,
-            @RequestParam int lastElement) throws JsonProcessingException {
-
-        List<Activity> activities = activityService.getActivities(groupId, firstElement, lastElement);
-        ObjectMapper objectMapper = new ObjectMapper();
-        String output = "";
-        for (Activity activity : activities) {
-            output = objectMapper.writeValueAsString(activity);
-        }
-        return ResponseEntity.ok(output);
+            @RequestParam int lastElement) throws JsonProcessingException
+    {
+        return activityService.getActivities(groupId, firstElement, lastElement);
     }
 }

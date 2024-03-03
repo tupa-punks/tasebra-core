@@ -3,18 +3,14 @@ package com.example.card_game_helper.Models;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.UuidGenerator;
 
 import jakarta.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
-@NamedQueries({
-        @NamedQuery(
-                name = "Activity.findInRangeByGroupId",
-                query = "SELECT e FROM Activity e WHERE e.group.Id = :groupId AND e.someIntColumn BETWEEN :firstElement AND :lastElement"
-        )
-})
+
 @Entity
 @Table(name = "activities")
 public class Activity {
@@ -29,10 +25,11 @@ public class Activity {
     private int likes;
 
     @ManyToMany
+    @JsonIgnore
     Set<User> usersLikes;
-
     @ManyToOne
     @JoinColumn(name = "group_id")
+    @JsonIgnore
     private Group group;
 
 

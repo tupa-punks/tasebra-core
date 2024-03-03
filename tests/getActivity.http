@@ -1,0 +1,1 @@
+GET http://localhost:8080/getActivities?groupId=891a771e-6cfb-4986-bafc-28d0bcf2d9ab&firstElement=0&lastElement=20
