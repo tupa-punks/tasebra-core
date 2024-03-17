@@ -7,6 +7,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.UuidGenerator;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -31,8 +34,16 @@ public class Activity {
     @JoinColumn(name = "group_id")
     @JsonIgnore
     private Group group;
+    @ManyToMany
+    private List<Tag> tags;
 
+    public List<Tag> getTags() {
+        return tags;
+    }
 
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 
     public int getLikes() {
         return likes;
