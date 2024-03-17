@@ -8,6 +8,8 @@ package com.example.card_game_helper.Models;
 import org.hibernate.annotations.UuidGenerator;
 
 import jakarta.persistence.*;
+
+import java.util.List;
 import java.util.UUID;
 import java.util.Set;
 
@@ -25,7 +27,8 @@ public class Tag {
     @ManyToOne
     @JoinColumn(name = "group_id")
     private Group group;
-
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
+    private List<Activity> activities;
 
     public UUID getTag_id() {
         return id;
